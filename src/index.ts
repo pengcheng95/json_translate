@@ -1,16 +1,19 @@
 import bodyParser from "body-parser";
 import express from "express";
+const cors = require("cors");
 
 import { iterateObj } from "./utils";
 
 const app = express();
 const port = process.env.PORT || 3333;
 
+app.use(cors());
+
 app.use(bodyParser.json());
 app.use(bodyParser.raw({ type: "application/vnd.custom-type" }));
 app.use(bodyParser.text({ type: "text/html" }));
 
-app.get("/translate/:lang", async (req, res) => {
+app.post("/translate/:lang", async (req, res) => {
   console.log(req.body);
   console.log(req.params.lang);
 
